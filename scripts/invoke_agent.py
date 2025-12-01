@@ -45,14 +45,18 @@ def invoke_agent(
         runtimeUserId=user_id,
     )
 
-    # ストリーミングレスポンスの処理
-    result = ""
-    for event in response["body"]:
-        chunk = event.get("chunk", {})
-        if "bytes" in chunk:
-            result += chunk["bytes"].decode("utf-8")
+    # StreamingBodyからレスポンスを読み取り
+    content = []
+    for chunk in response.get("response", []):
+        content.append(chunk.decode("utf-8"))
 
-    return result
+    # JSONとしてパースして結果を返す
+    result = "".join(content)
+    try:
+        parsed = json.loads(result)
+        return json.dumps(parsed, ensure_ascii=False, indent=2)
+    except json.JSONDecodeError:
+        return result
 
 
 def main():

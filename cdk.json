@@ -19,7 +19,8 @@
   "context": {
     "agentCoreConfig": {
       "providerName": "gateway-credential-provider",
-      "gatewayName": "slack-agentcore-gateway"
+      "gatewayName": "slack-and-lambda-gateway",
+      "apiKeyName": "slack_bot_token"
     },
     "@aws-cdk/aws-signer:signingProfileNamePassedToCfn": true,
     "@aws-cdk/aws-ecs-patterns:secGroupsDisablesImplicitOpenListener": true,

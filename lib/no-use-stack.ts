@@ -18,11 +18,12 @@ export class AgentCoreGatewayAndRuntimeStack extends cdk.Stack {
 
 		const { providerName, gatewayName } = props;
 
-		const gateway = new agentcore.Gateway(this, 'SlackGateway', {
+		// Gateway本体を作成する
+		const gateway = new agentcore.Gateway(this, 'LambdaGateway', {
 			gatewayName,
-			description: 'Agents can access to Slack workspace to get and write some messages.',
+			description: 'Agents can access to Lambda function to get current time.',
 			protocolConfiguration: new agentcore.McpProtocolConfiguration({
-				instructions: 'Agents can access to Slack workspace to get and write some messages.',
+				instructions: 'Agents can access to Lambda function to get current time.',
 				searchType: agentcore.McpGatewaySearchType.SEMANTIC, // ツールのセマンティック検索有効化
 				supportedVersions: [
 					agentcore.MCPProtocolVersion.MCP_2025_03_26,
